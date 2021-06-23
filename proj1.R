@@ -6,6 +6,9 @@ beds <- read_csv("hospitalbeds.csv")
 
 # Clean data up
 covid <- covid %>% select(-Lat, -Long) %>% pivot_longer(!c(`Country/Region`,`Province/State`), names_to = 'date', values_to = 'cases')
-covid %>% group_by(`Country/Region`,`date`) %>% summarise(cases=sum(cases))
+covid <- covid %>% group_by(`Country/Region`,`date`) %>% summarise(cases=sum(cases))
 demographics <- demographics %>% select(-`Country Code`)
 # TODO - join all 3 tables
+
+beds.tidy <- beds %>% group_by(Country) %>% summarize(Year=max(Year))
+beds.tidy <- beds.tidy %>% left_join(beds) %>% view()
