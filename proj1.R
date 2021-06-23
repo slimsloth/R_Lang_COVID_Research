@@ -7,3 +7,4 @@ beds <- read_csv("hospitalbeds.csv")
 # Clean data up
 covid <- covid %>% select(-Lat, -Long) %>% pivot_longer(!c(`Country/Region`,`Province/State`), names_to = 'date', values_to = 'cases')
 demographics <- demographics %>% select(-`Country Code`)
+# TODO - join all 3 tables
