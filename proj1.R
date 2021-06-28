@@ -6,18 +6,6 @@ demographics <- read_csv("demographics.csv")
 beds <- read_csv("hospitalbeds.csv")
 
 # Clean data up
-<<<<<<< HEAD
-covid <- covid %>% select(-Lat, -Long) %>% pivot_longer(!c(`Country/Region`,`Province/State`), names_to = 'date', values_to = 'cases')
-
-covid$date <- as.Date(covid$date,"%d%b%Y")
-class(covid$date)
-# covid %>% filter(date==max(date)) %>% view()
-#covid <- covid %>% group_by(`Country/Region`) %>% summarise(cases=max(cases))
-
-beds %>% group_by(Country) %>% summarise(beds=`Hospital beds (per 10 000 population)`)
-demographics <- demographics %>% select(-`Country Code`)
-# TODO - join all 3 tables
-=======
 covid_cases <- covid_cases %>% select(-Lat, -Long) %>% pivot_longer(!c(`Country/Region`,`Province/State`), names_to = 'date', values_to = 'cases')
 covid_cases <- covid_cases %>% group_by(`Country/Region`,`date`) %>% summarise(cases=sum(cases))
 covid_cases <- covid_cases %>% group_by(`Country/Region`) %>% summarise(cases=max(cases))
@@ -37,4 +25,3 @@ demographics <- demographics %>% select(-"Series Name", -`Country Code`) %>% piv
 joined_data <- covid_cases %>% inner_join(beds.tidy) %>% inner_join(covid_deaths) %>% inner_join(demographics) %>% select(-Year) %>% rename(beds = `Hospital beds (per 10 000 population)`)
 joined_data <- joined_data %>% mutate(deathrate = deaths/cases) %>% view()
 joined_data <- joined_data %>% relocate(deathrate, .before = cases) %>% select(-deaths)
->>>>>>> 57ece2dbf51473218e9fbcafe5d2a30e7c134b21
