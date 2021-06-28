@@ -24,5 +24,4 @@ demographics <- demographics %>% select(-"Series Name", -`Country Code`) %>% piv
 
 joined_data <- covid_cases %>% inner_join(beds.tidy) %>% inner_join(covid_deaths) %>% inner_join(demographics) %>% select(-Year) %>% rename(beds = `Hospital beds (per 10 000 population)`)
 joined_data <- joined_data %>% mutate(deathrate = deaths/cases) %>% view()
-joined_data <- joined_data %>% select(Country, deathrate, cases, beds, SP.DYN.LE00.IN, SP.URB.TOTL, SP.POP.TOTL, SP.POP.80UP.FE, SP.POP.80UP.MA, SP.POP.1564.MA.IN, SP.POP.1564.FE.IN, SP.POP.0014.MA.IN, SP.POP.0014.FE.IN, SP.DYN.AMRT.FE, SP.DYN.AMRT.MA, SP.POP.TOTL.FE.IN, SP.POP.TOTL.MA.IN, SP.POP.65UP.FE.IN, SP.POP.65UP.MA.IN)
-joined_data %>% view()
+joined_data <- joined_data %>% relocate(deathrate, .before = cases) %>% select(-deaths)
