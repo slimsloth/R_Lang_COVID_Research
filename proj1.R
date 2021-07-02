@@ -63,17 +63,17 @@ mod_D <- lm(data=joined_data, deathrate~SP.DYN.LE00.IN)
 mod_E <- lm(data=joined_data, deathrate~SP.POP.TOTL)
 
 # We used these summaries to check the R^2 values for each linear model
-#summary(mod_A) > 0.06514
-#summary(mod_B) > 0.05249
-#summary(mod_C) > 0.01097
-#summary(mod_D) > 0.01045
-#summary(mod_E) > 0.01809
+#summary(mod_A) > 0.04256 (adjusted r^2 value)
+#summary(mod_B) > 0.03639 (adjusted r^2 value)
+#summary(mod_C) > 0.01097 (r^2 value)
+#summary(mod_D) > 0.01045 (r^2 value)
+#summary(mod_E) > 0.01809 (r^2 value)
 
 # Plots the death and case data in order to check for a correlation between deaths and cases.
 ggplot(data=joined_data)+geom_point(aes(x=deaths, cases))
 
 # Saves the R^2 values in a vector to use for the barplot
-r_squared_mod_values <- c(0.06514, 0.05249, 0.01097, 0.01045, 0.01809)
+r_squared_mod_values <- c(0.04256, 0.03639, 0.01097, 0.01045, 0.01809)
 group <- LETTERS[1:5]
 
 # Plots each of the R^2 values from the five linear models in order to compare the differences
